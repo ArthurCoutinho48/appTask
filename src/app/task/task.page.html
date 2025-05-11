@@ -1,0 +1,34 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tab1"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="ion-padding">
+
+    <h4 class="p-4">Nova tarefa</h4>
+   
+  </div>
+
+  <ion-list>
+    <ion-item class="textfielde">
+      <ion-input type="text" placeholder="Título"></ion-input>
+    </ion-item>
+
+    <ion-item class="textfielde">
+      <ion-input type="text" placeholder="Horário"></ion-input>
+    </ion-item>
+
+    <ion-item class="textfielde">
+      <ion-textarea [autoGrow]="true" placeholder="Assunto"></ion-textarea>
+    </ion-item>
+
+    <ion-button>Adicionar</ion-button>
+
+  </ion-list>
+
+</ion-content>

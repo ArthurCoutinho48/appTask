@@ -1,0 +1,31 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+
+    <ion-item button lines="none">
+      <ion-avatar slot="start" class="dark">
+        <img src="" alt="Foto">
+      </ion-avatar>
+      <ion-label>
+        Arthur
+        <p>Grade 11</p>
+      </ion-label>
+    </ion-item>
+
+    <h4 class="p-4">Notificações</h4>
+
+    <ion-item button lines="none" class="badge-item" [routerLink]="['/home']">
+      <ion-avatar slot="start" class="dark">
+        
+      </ion-avatar>
+      <ion-label>
+        Sair desta conta
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>

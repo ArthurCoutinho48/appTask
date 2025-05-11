@@ -1,1 +1,12 @@
-
+.novaTarefa{
+    margin-right: 12px;
+    margin-left: 12px;
+    --background: var(--cor-verde);
+    color: var(--cor-neutra-1);
+    --border-radius: 8px;
+    
+    span{
+        font-size: 25px;
+        font-weight: 500;
+    }
+}

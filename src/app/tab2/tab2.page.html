@@ -1,17 +1,50 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Programação</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="medium">
+        <ion-icon  name="ellipse" class="large-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="ion-padding">
+    <h4 class="p-4">Tarefas do dia</h4>
+  
+    <ion-grid fixed>
+      <ion-row>
+        <!--Card 01-->
+        <ion-col size="12">
+          <ion-card class="dark">
+            <ion-card-content>
+              <div class="title">
+                <ion-icon name="book-outline" class="fl"></ion-icon>
+                <p>Há tarefas<br>a fazer</p>
+                <ion-icon name="chevron-forward-outline" class="fr icon-go" [routerLink]="['/display-task']"></ion-icon>
+                <h2>Faculdade</h2>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+  
+        <!--Card 02-->
+        <ion-col size="12">
+          <ion-card class="dark">
+            <ion-card-content>
+              <div class="title">
+                <ion-icon name="book-outline" class="fl"></ion-icon>
+                <p>Há tarefas<br>a fazer</p>
+                <ion-icon name="chevron-forward-outline" class="fr icon-go"></ion-icon>
+                <h2>Academia</h2>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </div>
 </ion-content>

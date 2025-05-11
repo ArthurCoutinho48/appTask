@@ -1,17 +1,103 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true" class="ion-no-border">
+    <ion-toolbar>
+      <ion-title>
+        Home
+      </ion-title>
+  
+      <ion-buttons slot="end">
+        <ion-button color="medium">
+          <ion-icon  name="ellipse" class="large-icon"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <div class="ion-padding">
+      <h4 class="p-4">Dashboard</h4>
+  
+      <ion-grid fixed>
+        <ion-row>
+          <!--Card 01-->
+          <ion-col size="6">
+            <ion-card class="dark">
+              <ion-card-content>
+                <div class="title">
+                  <ion-icon name="book-outline" class="fl"></ion-icon>
+                  <p>Tarefas pendentes</p>
+                  <h2>4</h2>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+  
+          <!--Card 02-->
+          <ion-col size="6">
+            <ion-card class="medium">
+              <ion-card-content>
+                <div class="title">
+                  <ion-icon name="mail-outline" class="fl"></ion-icon>
+                  <p>Tarefas concluídas</p>
+                  <h2>95%</h2>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+  
+          <!--Card 03-->
+          <ion-col size="6">
+            <ion-card class="medium">
+              <ion-card-content>
+                <div class="title">
+                  <ion-icon name="bar-chart-outline" class="fl"></ion-icon>
+                  <p>Total de tarefas</p>
+                  <h2>10</h2>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+  
+          <!--Card 04-->
+          <ion-col size="6">
+            <ion-card class="medium">
+              <ion-card-content>
+                <div class="title">
+                  <ion-icon name="reader-outline" class="fl"></ion-icon>
+                  <p>Tarefas do dia</p>
+                  <h2>4</h2>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+  
+          <!--Card 05-->
+        <!--<ion-col size="12">
+            <ion-card class="medium">
+              <ion-card-content>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-card-content>
+                      <div class="title">
+                        <ion-icon name="time-outline" class="fl"></ion-icon>
+                        <p>Next class today</p>
+                        <h2>Math</h2>
+                      </div>
+                    </ion-card-content>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-card-content>
+                      <div class="title">
+                        <p class="mb">09:00 AM <br> 10:30 AM</p>
+                        <p>B-200 <br> Classroom</p>
+                      </div>
+                    </ion-card-content>
+                  </ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>-->
+        </ion-row>
+      </ion-grid>
+    </div>
 </ion-content>
+  

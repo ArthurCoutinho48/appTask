@@ -1,0 +1,38 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar class="ion-header-dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="contentInput">
+
+    <div class="wave-top"></div>
+
+    <ion-list>
+
+      <ion-item class="textfielde">
+        <ion-input type="text" placeholder="Username"></ion-input>
+      </ion-item>
+  
+      <ion-item class="textfielde">
+        <ion-input type="password" placeholder="Senha"></ion-input>
+      </ion-item>
+
+      <div class="textSenha">
+        <span>Esqueceu sua senha?</span>
+      </div>
+
+      <ion-button [routerLink]="['/tabs/tab1']">Entrar</ion-button>
+
+    </ion-list>
+
+    <div class="textCadastro" [routerLink]="['/register']">
+      <span>Criar nova conta</span>
+    </div>
+  </div>
+
+</ion-content>

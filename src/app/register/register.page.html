@@ -1,0 +1,38 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar class="ion-header-dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="contentInput">
+
+    <div class="wave-top"></div>
+
+    <ion-list>
+
+      <ion-item class="textfielde">
+        <ion-input type="text" placeholder="Username"></ion-input>
+      </ion-item>
+
+      <ion-item class="textfielde">
+        <ion-input type="email" placeholder="E-mail"></ion-input>
+      </ion-item>
+  
+      <ion-item class="textfielde">
+        <ion-input type="password" placeholder="Senha"></ion-input>
+      </ion-item>
+
+      <ion-button [routerLink]="['/login']">Cadastrar</ion-button>
+
+    </ion-list>
+
+    <div class="textCadastro" [routerLink]="['/login']">
+      <span>Já tenho conta</span>
+    </div>
+  </div>
+
+</ion-content>

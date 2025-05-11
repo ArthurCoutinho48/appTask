@@ -1,0 +1,53 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tab2"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="ion-padding">
+
+    <ion-grid fixed>
+
+      <ion-row>
+
+        <!--Card 01-->
+        <ion-col size="12">
+          <ion-card class="dark">
+            <ion-card-header>
+              <ion-card-title>Faculdade</ion-card-title>
+              <ion-card-subtitle class="task-card">
+                <div>
+                  <ion-icon name="remove-circle-outline" class="fl" id="pd"></ion-icon>
+                  <p>Pendente</p>
+                </div>
+                <div>
+                  <ion-icon name="stopwatch-outline" class="fl"></ion-icon>
+                  <p>12h00</p>
+                </div>
+              </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <p>Criar um formulário web, que respeite a identidade visual da UNISUAM e também cubra múltiplas necessidades. Os alunos deverão utilizar HTML e CSS para o desenvolvimento.</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+   
+  </div>
+
+  <div>
+    <ion-button id="verde">Realizado</ion-button>
+    <ion-button id="cinza">Alterar</ion-button>
+    <ion-button id="vermelho">Excluir</ion-button>
+  </div>
+  
+  
+  
+</ion-content>

@@ -1,17 +1,67 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Calendário</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="medium">
+        <ion-icon  name="ellipse" class="large-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ion-padding">
+    <ion-card class="calendar">
+      <div class="cal-nav ion-text-center">
+        <ion-button class="fl" fill="clear" size="small" color="dark" (click)="onPreviousMonth()">
+          <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+        </ion-button>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+        <span>{{currentMonthName}} &nbsp; {{currentYear}}</span>
+
+        <ion-button class="fr" fill="clear" size="small" color="dark" (click)="onNextMonth()">
+          <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <span *ngFor='let weekDay of weekDaysName' class="day current">{{weekDay}}</span>
+
+      <span *ngFor='let day of monthDays' class="day">{{day.number}}</span>
+    </ion-card>
+
+    <br>
+
+    <h4 class="p-4">Próximas tarefas</h4>
+
+    <!--Card 01-->
+    <ion-item button line="nome">
+      <ion-avatar slot="start" class="medium">
+        <img src="../../assets/icon/atom.svg" alt="Foto">
+      </ion-avatar>
+      <ion-label>
+        Curso Ciência
+        <p>Apresentação</p>
+      </ion-label>
+      <ion-label slot="end">
+        <p class="ion-text-right">Seg, 10:00 AM</p>
+        <p>&nbsp;</p>
+      </ion-label>
+    </ion-item>
+
+     <!--Card 02-->
+     <ion-item button line="nome">
+      <ion-avatar slot="start" class="medium">
+        <img src="../../assets/icon/atom.svg" alt="Foto">
+      </ion-avatar>
+      <ion-label>
+        Curso Ciência
+        <p>Teste</p>
+      </ion-label>
+      <ion-label slot="end">
+        <p class="ion-text-right">Sex, 10:00 AM</p>
+        <p>&nbsp;</p>
+      </ion-label>
+    </ion-item>
+  </div>
 </ion-content>
