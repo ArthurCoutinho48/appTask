@@ -1,5 +1,15 @@
-<ion-content fullscreen class="welcome-screen">
-  <div class="wave-top"></div>
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-title>Organize seu dia. <br> Domine sua vida.</ion-title>  
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button id="circle" [routerLink]="['/login']">
+      <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <!--<div class="wave-top"></div>
 
   <div class="text-section">
     <h1>Olá, bem-vindo!</h1>
@@ -14,5 +24,5 @@
     <ion-fab-button id="circle" [routerLink]="['/login']">
       <ion-icon name="arrow-forward-circle-outline"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab>-->
 </ion-content>

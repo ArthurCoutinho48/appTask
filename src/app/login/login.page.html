@@ -1,38 +1,61 @@
-<ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar class="ion-header-dark">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  
-  <div class="contentInput">
 
-    <div class="wave-top"></div>
+  <div class="header">
+    <ion-title class="title">Welcome Back</ion-title>
+    <p class="subTitle">Faça login para acessar sua conta</p>
+  </div>
 
-    <ion-list>
-
-      <ion-item class="textfielde">
-        <ion-input type="text" placeholder="Username"></ion-input>
+  <form [formGroup]="loginForm">
+    <div class="ion-padding">
+      
+      <ion-item>
+        <ion-input formControlName="email" type="email" placeholder="Email" class="input"></ion-input>
+        <ion-icon name="mail-outline"></ion-icon>
       </ion-item>
-  
-      <ion-item class="textfielde">
-        <ion-input type="password" placeholder="Senha"></ion-input>
-      </ion-item>
+      <div class="erroControl" *ngIf="loginForm.controls?.['email']?.touched && loginForm.controls?.['email']?.invalid">
+        <ion-text *ngIf="errorControl['email']?.errors?.['required']">
+          O e-mail é obrigatório!
+        </ion-text>
 
-      <div class="textSenha">
-        <span>Esqueceu sua senha?</span>
+        <ion-text *ngIf="errorControl['email']?.errors?.['pattern']">
+          O e-mail deve ser válido!
+        </ion-text>
       </div>
 
-      <ion-button [routerLink]="['/tabs/tab1']">Entrar</ion-button>
+      <ion-item>
+        <ion-input  formControlName="password" type="password" placeholder="Senha" class="input"></ion-input>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </ion-item>
+      <div class="erroControl" *ngIf="loginForm.controls?.['password']?.touched && loginForm.controls?.['password']?.invalid">
+        <ion-text *ngIf="errorControl['password']?.errors?.['required']">
+          A senha é obrigatório!
+        </ion-text>
 
-    </ion-list>
+        <ion-text *ngIf="errorControl['password']?.errors?.['pattern']">
+          A senha deve ter pelo menos:
+          <br>
+          Um caractere
+          <br>
+          Uma letra maiúscula
+          <br>
+          Um número
+          <br>
+          Conter 8 dígitos
+        </ion-text>
+      </div>
 
-    <div class="textCadastro" [routerLink]="['/register']">
-      <span>Criar nova conta</span>
+      <div class="forgotPassword">
+        <a [routerLink]="['/reset-password']">Esqueceu sua senha?</a>
+      </div>
+
+      <div class="loginButton">
+        <ion-button (click)="login()">Entrar</ion-button>
+      </div>
+      
+      <div class="signupLink">
+        <p>Não tem conta?<a [routerLink]="['/register']">Cadastre-se agora</a></p>
+      </div>
     </div>
-  </div>
+  </form>
 
 </ion-content>
