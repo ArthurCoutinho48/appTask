@@ -13,7 +13,7 @@
       </ion-item>
       <div class="erroControl" *ngIf="regForm.controls?.['fullname']?.touched && regForm.controls?.['fullname']?.invalid">
         <ion-text *ngIf="errorControl['fullname']?.errors?.['required']">
-          Fullname is required
+          O usuário é obrigatório!
         </ion-text>
       </div>
 
@@ -23,11 +23,11 @@
       </ion-item>
       <div class="erroControl" *ngIf="regForm.controls?.['email']?.touched && regForm.controls?.['email']?.invalid">
         <ion-text *ngIf="errorControl['email']?.errors?.['required']">
-          Email is required
+          O e-mail é obrigatório!
         </ion-text>
 
         <ion-text *ngIf="errorControl['email']?.errors?.['pattern']">
-          Email should be valid
+          O e-mail deve ser válido!
         </ion-text>
       </div>
 
@@ -37,15 +37,19 @@
       </ion-item>
       <div class="erroControl" *ngIf="regForm.controls?.['password']?.touched && regForm.controls?.['password']?.invalid">
         <ion-text *ngIf="errorControl['password']?.errors?.['required']">
-          Password is required
+          A senha é obrigatório!
         </ion-text>
 
         <ion-text *ngIf="errorControl['password']?.errors?.['pattern']">
-          Password must atleast have
-          One Character
-          One Capital Letter
-          One number
-          Contain 8 digit
+          A senha deve ter pelo menos:
+          <br>
+          Um caractere.
+          <br>
+          Uma letra maiúscula.
+          <br>
+          Um número.
+          <br>
+          Conter 8 dígitos.
         </ion-text>
       </div>
 
@@ -60,31 +64,4 @@
     </div>
   </form>
   
-  <!--<div class="contentInput">
-
-    <div class="wave-top"></div>
-
-    <ion-list>
-
-      <ion-item class="textfielde">
-        <ion-input type="text" placeholder="Username"></ion-input>
-      </ion-item>
-
-      <ion-item class="textfielde">
-        <ion-input type="email" placeholder="E-mail"></ion-input>
-      </ion-item>
-  
-      <ion-item class="textfielde">
-        <ion-input type="password" placeholder="Senha"></ion-input>
-      </ion-item>
-
-      <ion-button [routerLink]="['/login']">Cadastrar</ion-button>
-
-    </ion-list>
-
-    <div class="textCadastro" [routerLink]="['/login']">
-      <span>Já tenho conta</span>
-    </div>
-  </div>-->
-
 </ion-content>

@@ -48,7 +48,9 @@ export class LoginPage implements OnInit {
   // Função executada ao tentar fazer login
   async login() {
     // Cria e exibe o loading
-    const loading = await this.loadingCtrl.create();
+    const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading'
+    });
     await loading.present();
 
     // Verifica se o formulário é válido
@@ -71,6 +73,9 @@ export class LoginPage implements OnInit {
         // Caso o login falhe sem erro explícito (usuário nulo)
         console.log('provide correct values');
       }
+    }else{
+      this.loginForm.markAllAsTouched();
+      loading.dismiss();
     }
   }
 

@@ -49,7 +49,9 @@ export class RegisterPage implements OnInit {
 
   // Método chamado ao enviar o formulário de cadastro
   async signUp() {
-    const loading = await this.loadingCtrl.create(); // Cria o loading
+    const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading'
+    }); // Cria o loading
     await loading.present(); // Mostra o loading
 
     // Verifica se o formulário é válido
@@ -71,6 +73,9 @@ export class RegisterPage implements OnInit {
         // Mensagem de erro (poderia ser exibida para o usuário)
         console.log('provide correct values');
       }
+    }else{
+      this.regForm.markAllAsTouched();
+      loading.dismiss();
     }
   }
 
