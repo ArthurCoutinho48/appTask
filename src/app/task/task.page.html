@@ -14,21 +14,24 @@
    
   </div>
 
-  <ion-list>
-    <ion-item class="textfielde">
-      <ion-input type="text" placeholder="título"></ion-input>
-    </ion-item>
 
-    <ion-item class="textfielde">
-      <ion-input type="text" placeholder="categoria"></ion-input>
-    </ion-item>
+    <div class="ion-padding">
 
-    <ion-item class="textfielde">
-      <ion-textarea [autoGrow]="true" placeholder="adicione uma descrição"></ion-textarea>
-    </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="title" class="input" type="text" placeholder="título"></ion-input>  
+      </ion-item>
 
-    <ion-button>Adicionar</ion-button>
+      <ion-item>
+        <ion-input [(ngModel)]="date" class="input" type="text" placeholder="data"></ion-input>
+      </ion-item>
 
-  </ion-list>
+      <ion-item>
+        <ion-textarea [(ngModel)]="content" class="input" [autoGrow]="true" placeholder="adicione uma descrição"></ion-textarea>
+      </ion-item>
+
+      <div class="adcButton">
+        <ion-button (click)="addTask()">Adicionar</ion-button>
+      </div>
+    </div>
 
 </ion-content>
