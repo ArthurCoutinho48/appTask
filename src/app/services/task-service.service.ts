@@ -34,4 +34,11 @@ export class TaskServiceService {
     const taskRef = collection(this.firestore, "tasks") // referência à coleção "tasks"
     return addDoc(taskRef, task); // adiciona o diário ao Firestore
   }
+
+  getTasks(userId: any): Observable<Task[]>{
+    const taskRef = collection(this.firestore, "tasks");
+    const refquery = query(taskRef, where('userId', '==', userId));
+
+    return collectionData(refquery, {idField:'id'}) as Observable <Task[]>;
+  }
 }

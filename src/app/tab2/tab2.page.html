@@ -15,9 +15,49 @@
     <h4 class="p-4">Tarefas do dia</h4>
   
     <ion-grid fixed>
-      <ion-row>
+      <ion-row *ngFor="let task of tasks">
         <!--Card 01-->
         <ion-col size="12">
+          <ion-card class="dark">
+            <ion-card-header>
+              <div class="teste">
+                <!--<ion-checkbox></ion-checkbox>-->
+                <ion-card-title>{{task.title}}</ion-card-title>
+              </div>
+             
+              <ion-card-subtitle class="task-card"> 
+                <div>
+                  <ion-icon name="remove-circle-outline" class="fl" id="pd"></ion-icon>
+                  <p>Pendente</p>
+                </div>
+                <div>
+                  <ion-icon name="stopwatch-outline" class="fl"></ion-icon>
+                  <p>04/06/25</p>
+                </div>
+              </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <p>{{task.content}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <!--Card 01-->
+        <!--<ion-col size="12">
+          <ion-list>
+            <ion-item-sliding>
+              <ion-item>
+
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option>
+                  <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+
           <ion-card class="dark">
             <ion-card-content>
               <div class="title">
@@ -28,10 +68,10 @@
               </div>
             </ion-card-content>
           </ion-card>
-        </ion-col>
+        </ion-col>-->
   
         <!--Card 02-->
-        <ion-col size="12">
+        <!--<ion-col size="12">
           <ion-card class="dark">
             <ion-card-content>
               <div class="title">
@@ -42,7 +82,7 @@
               </div>
             </ion-card-content>
           </ion-card>
-        </ion-col>
+        </ion-col>-->
       </ion-row>
     </ion-grid>
   

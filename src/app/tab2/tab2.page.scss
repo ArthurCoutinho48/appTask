@@ -49,3 +49,39 @@ ion-card{
     }
 
 }
+
+ion-card-title{
+    color: var(--cor-neutra-1);
+}
+
+.task-card{
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 50px;
+
+    div{
+        display: flex;
+        align-content: center;
+        align-items: center;
+    }
+
+    ion-icon:first-child{
+        font-size: 20px;
+        color: var(--cor-neutra-3);
+        background-color: var(--cor-neutra-1);
+        padding: 4px;
+        border: 1px solid var(--cor-neutra-1);
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+}
+
+.teste{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
+}
