@@ -54,7 +54,22 @@ ion-card-title{
     color: var(--cor-neutra-1);
 }
 
-.task-card{
+.cardTitle{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 14px;
+}
+
+ion-checkbox::part(container) {
+  background: transparent !important; /* Remove o fundo branco */
+  border: 2px solid var(--cor-neutra-1); /* Borda personalizada */
+  border-radius: 8px;
+  padding: 4px;
+  --size: 30px;
+}
+
+.cardSubTitle{
 
     display: flex;
     align-content: center;
@@ -65,6 +80,7 @@ ion-card-title{
         display: flex;
         align-content: center;
         align-items: center;
+        gap: 14px;
     }
 
     ion-icon:first-child{
@@ -74,14 +90,6 @@ ion-card-title{
         padding: 4px;
         border: 1px solid var(--cor-neutra-1);
         border-radius: 8px;
-        margin-right: 14px;
     }
 
-}
-
-.teste{
-    display: flex;
-    align-items: center;
-    align-content: center;
-    gap: 20px;
 }
