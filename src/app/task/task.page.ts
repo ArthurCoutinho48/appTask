@@ -33,7 +33,7 @@ export class TaskPage implements OnInit {
         userId: "", // será preenchido pelo serviço com o ID do usuário
         status: false, // status da tarefa
         title: this.title, // título do formulário
-        createdAt: new Date(), // data atual
+        createdAt: this.date, // data atual
         content: this.content, // conteúdo do formulário
       }).then(async () => {
         // Mostra um toast de sucesso
@@ -66,5 +66,34 @@ export class TaskPage implements OnInit {
         });
         (await toast).present();
     }
+  }
+
+  formatarData(event: any){
+    let valor = event.detail.value;
+
+    if (!valor) {
+      this.date = '';
+      return;
+    }
+
+    // Remove tudo que não for número
+    valor = valor.replace(/\D/g, '');
+
+    // Aplica a máscara manualmente
+    if (valor.length > 2 && valor.length <= 4) {
+      valor = valor.replace(/(\d{2})(\d+)/, '$1/$2');
+    } else if (valor.length > 4) {
+      valor = valor.replace(/(\d{2})(\d{2})(\d+)/, '$1/$2/$3');
+    }
+
+    // Limita a 10 caracteres
+    valor = valor.substring(0, 10);
+
+    // Atualiza o model manualmente
+    this.date = valor;
+
+    // Reflete na UI
+    const input = event.target as HTMLInputElement;
+    input.value = valor;
   }
 }

@@ -23,6 +23,7 @@
               <div class="cardTitle">
                 <ion-checkbox></ion-checkbox>
                 <ion-card-title>{{task.title}}</ion-card-title>
+                <ion-icon name="open-outline"></ion-icon>
               </div>
              
               <ion-card-subtitle class="cardSubTitle"> 
@@ -31,8 +32,8 @@
                   <p>Pendente</p>
                 </div>
                 <div>
-                  <ion-icon name="stopwatch-outline" class="fl"></ion-icon>
-                  <p>04/06/25</p>
+                  <ion-icon name="today-outline" class="fl"></ion-icon>
+                  <p>{{task.createdAt}}</p>
                 </div>
               </ion-card-subtitle>
             </ion-card-header>

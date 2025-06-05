@@ -13,6 +13,7 @@ export class Tab2Page implements OnInit{
 
   userId: any;             // Armazena o ID do usuário autenticado
   tasks: Task[] = [];      // Lista de tarefas do usuário
+  status: any;
 
   constructor(
     private authService: AuthenticationService,     // Injeta o serviço de autenticação

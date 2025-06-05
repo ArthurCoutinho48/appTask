@@ -18,15 +18,29 @@
     <div class="ion-padding">
 
       <ion-item>
-        <ion-input [(ngModel)]="title" class="input" type="text" placeholder="título"></ion-input>  
+        <ion-input 
+        [(ngModel)]="title"
+        class="input"
+        type="text"
+        placeholder="título"></ion-input>  
       </ion-item>
 
       <ion-item>
-        <ion-input [(ngModel)]="date" class="input" type="text" placeholder="data"></ion-input>
+        <ion-input 
+        [value]="date"
+        (ionInput)="formatarData($event)"
+        class="input"
+        type="text"
+        inputmode="numeric"
+        placeholder="dd/mm/aaaa"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-textarea [(ngModel)]="content" class="input" [autoGrow]="true" placeholder="adicione uma descrição"></ion-textarea>
+        <ion-textarea 
+        [(ngModel)]="content"
+        class="input"
+        [autoGrow]="true"
+        placeholder="adicione uma descrição"></ion-textarea>
       </ion-item>
 
       <div class="adcButton">
