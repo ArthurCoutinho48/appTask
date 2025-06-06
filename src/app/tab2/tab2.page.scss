@@ -56,13 +56,24 @@ ion-card-title{
 
 .cardTitle{
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    align-content: center;
-    gap: 14px;
 
-    ion-icon{
-        font-size: 20px;
+    .cardTitleLeft{
+        display: flex;
+        align-items: center;
+        gap: 14px;
     }
+
+    .cardTitleRight{
+        display: flex;
+        align-items: center;
+
+        ion-icon{
+            font-size: 20px;
+        }
+    }
+    
 }
 
 ion-checkbox::part(container) {

@@ -15,15 +15,21 @@
     <h4 class="p-4">Tarefas do dia</h4>
   
     <ion-grid fixed>
-      <ion-row *ngFor="let task of tasks">
+      <ion-row>
         <!--Card 01-->
-        <ion-col size="12">
+        <ion-col size="12" *ngFor="let task of tasks">
           <ion-card class="dark">
             <ion-card-header>
               <div class="cardTitle">
-                <ion-checkbox></ion-checkbox>
-                <ion-card-title>{{task.title}}</ion-card-title>
-                <ion-icon name="open-outline"></ion-icon>
+                <div class="cardTitleLeft">
+                  <ion-checkbox></ion-checkbox>
+                  <ion-card-title>{{task.title}}</ion-card-title>
+                </div>
+
+                <div class="cardTitleRight">
+                  <ion-icon name="open-outline" (click)="openTask(task)"></ion-icon>
+                </div>
+                
               </div>
              
               <ion-card-subtitle class="cardSubTitle"> 

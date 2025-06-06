@@ -35,10 +35,23 @@ export class TaskServiceService {
     return addDoc(taskRef, task); // adiciona o diário ao Firestore
   }
 
+  // Retorna todos as tarefas de um determinado usuário (relação 1:N)
   getTasks(userId: any): Observable<Task[]>{
-    const taskRef = collection(this.firestore, "tasks");
-    const refquery = query(taskRef, where('userId', '==', userId));
+    const taskRef = collection(this.firestore, "tasks"); // Referência à coleção
+    const refquery = query(taskRef, where('userId', '==', userId)); // Consulta filtrando por userId
 
-    return collectionData(refquery, {idField:'id'}) as Observable <Task[]>;
+    return collectionData(refquery, {idField:'id'}) as Observable <Task[]>; // Retorna os dados como array reativo
+  }
+
+  // Retorna uma tarefa específico pelo ID (consulta 1:1)
+  getTaskById(id:any): Observable<Task>{
+    const taskRef = doc(this.firestore, `tasks/${id}`); //  Referência à coleção
+    return docData(taskRef, {idField: 'id'}) as Observable<Task>; // Retorna a tarefa como Observable
+  }
+
+  // Remove um diário pelo ID
+  removeJournal(id:any){
+    const taskRef = doc(this.firestore, `tasks/${id}`); // Referência ao documento
+    return deleteDoc(taskRef); // Exclui o documento do Firestore
   }
 }

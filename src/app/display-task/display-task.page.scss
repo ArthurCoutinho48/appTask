@@ -1,8 +1,26 @@
-ion-card-title{
-    color: var(--cor-neutra-1);
+ion-content{
+    --background: var(--cor-neutra-4);
 }
 
-.task-card{
+ion-item{
+    margin-bottom: 16px;
+    --inner-border-width: 0;
+    --border-width: 0;
+    border: 2px solid var(--cor-neutra-4);
+    border-radius: 10px;
+    --background: var(--cor-neutra-3);
+}
+
+.input{
+    font-size: 300;
+    border-bottom: none;
+    box-shadow: none;
+    color: var(--cor-neutra-0);
+    background-color: var(--cor-neutra-3);
+}
+
+
+.cardSubTitle{
 
     display: flex;
     align-content: center;
@@ -27,6 +45,15 @@ ion-card-title{
     }
 
 }
+
+.cardSubTitleRight{
+    ion-item{
+        margin-bottom: 0;
+    }
+}
+
+
+
 
 ion-button{
     height: 51px;
