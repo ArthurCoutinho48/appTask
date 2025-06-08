@@ -18,11 +18,11 @@
       <ion-row>
         <!--Card 01-->
         <ion-col size="12" *ngFor="let task of tasks">
-          <ion-card class="dark">
+          <ion-card class="dark" [ngClass]="{ 'completedTask': task.status == true }">
             <ion-card-header>
               <div class="cardTitle">
                 <div class="cardTitleLeft">
-                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox (click)="concTask(task)" [(ngModel)]="task.status"></ion-checkbox>
                   <ion-card-title>{{task.title}}</ion-card-title>
                 </div>
 

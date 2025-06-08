@@ -34,6 +34,16 @@ export class Tab2Page implements OnInit{
     await modal.present();
   }
 
+  concTask(task: any){
+    if(task.status == true){
+      task.status = false;
+      this.taskService.completedTask(task);
+    }else if (task.status == false){
+      task.status = true;
+      this.taskService.completedTask(task);
+    }
+  }
+
   ngOnInit() {
     // Ao iniciar a página, obtém o perfil do usuário autenticado
     this.authService.getProfile().then(user =>{

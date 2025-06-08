@@ -44,13 +44,19 @@ export class TaskServiceService {
   }
 
   // Retorna uma tarefa específico pelo ID (consulta 1:1)
-  getTaskById(id:any): Observable<Task>{
+  getTaskById(id: any): Observable<Task>{
     const taskRef = doc(this.firestore, `tasks/${id}`); //  Referência à coleção
     return docData(taskRef, {idField: 'id'}) as Observable<Task>; // Retorna a tarefa como Observable
   }
 
+  // Retorna a tarefa com status atualizado
+  completedTask(task: any){
+    const taskRef = doc(this.firestore, `tasks/${task.id}`) // Referência ao documento
+    return updateDoc(taskRef, {status: task.status})
+  }
+
   // Remove um diário pelo ID
-  removeJournal(id:any){
+  removeJournal(id: any){
     const taskRef = doc(this.firestore, `tasks/${id}`); // Referência ao documento
     return deleteDoc(taskRef); // Exclui o documento do Firestore
   }
