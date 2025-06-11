@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service'; // Serviço para autenticação do usuário
+import { TaskServiceService } from '../services/task-service.service'; // Serviço para manipulação das tarefas
+import { Task } from '../class/task'; // Modelo da tarefa
+import { IonModal, ModalController } from '@ionic/angular';
+import { DisplayTaskPage } from '../display-task/display-task.page';
 
 export class Day {
   public number: number = 0;
@@ -16,6 +21,7 @@ export class Day {
   standalone: false,
 })
 export class Tab3Page implements OnInit {
+  @ViewChild(IonModal) modal!: IonModal; // Referência ao modal da interface para manipulação direta
 
   //Ano e mês atual
   currentYear: number;
@@ -26,9 +32,16 @@ export class Tab3Page implements OnInit {
 
   // Nomes dos dias da semana
   weekDaysName: string[] = [];
+
+  userId: any;             // Armazena o ID do usuário autenticado
+  tasks: Task[] = [];      // Lista de tarefas do usuário
   
   // Construtor: inicializa o ano e o mês atual com base na data do sistema
-  constructor() {
+  constructor(
+    private authService: AuthenticationService,     // Injeta o serviço de autenticação
+    private taskService: TaskServiceService,         // Injeta o serviço de tarefas
+    private modalCtrl: ModalController // Controlador de modal
+  ) {
     let date = new Date();
     this.currentYear = date.getFullYear();
     this.currentMonthIndex = date.getMonth(); // valores de 0 (jan) a 11 (dez)
@@ -39,6 +52,14 @@ export class Tab3Page implements OnInit {
     this.setMonthDays(this.getMonth(this.currentMonthIndex, this.currentYear));
   
     this.weekDaysName = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+    // Ao iniciar a página, obtém o perfil do usuário autenticado
+    this.authService.getProfile().then(user =>{
+      this.userId = user?.uid; // Armazena o ID do usuário
+      console.log(this.userId);
+
+      this.loadTasksForCurrentMonth();
+    })
   }
   
   getMonth(monthIndex: number, year: number): Day[] {
@@ -115,6 +136,7 @@ export class Tab3Page implements OnInit {
     }
   
     this.setMonthDays(this.getMonth(this.currentMonthIndex, this.currentYear));
+    this.loadTasksForCurrentMonth();
   }
   
   // Volta para o mês anterior
@@ -126,10 +148,36 @@ export class Tab3Page implements OnInit {
     }
   
     this.setMonthDays(this.getMonth(this.currentMonthIndex, this.currentYear));
+    this.loadTasksForCurrentMonth();
   }
   
-    // Getter que retorna o nome do mês atual, usado no HTML
+  // Getter que retorna o nome do mês atual, usado no HTML
   get currentMonthName(): string {
     return this.getMonthName(this.currentMonthIndex);
+  }
+
+  loadTasksForCurrentMonth() {
+    this.taskService.getTasks(this.userId).subscribe(res => {
+      const selectedMonth = String(this.currentMonthIndex + 1).padStart(2, '0');
+      const selectedYear = String(this.currentYear);
+
+      this.tasks = res.filter((task) => {
+        const [day, month, year] = task.createdAt.trim().split('/');
+        return month === selectedMonth && year === selectedYear;
+      });
+
+      console.log('Tarefas do mês:', this.tasks);
+    });
+  }
+
+  // Abre um modal com os detalhes de um diário específico
+  async openTask(task: Task){
+    const modal = await this.modalCtrl.create({
+        component: DisplayTaskPage, // Componente modal a ser aberto
+        componentProps: { id: task.id }, // Passa o ID do diário como propriedade
+        breakpoints: [0, 0.6, 1.0], // Define os tamanhos possíveis do modal
+        initialBreakpoint: 0.6 // Define o tamanho inicial do modal
+    });
+    await modal.present();
   }
 }

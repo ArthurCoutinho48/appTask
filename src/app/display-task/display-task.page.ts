@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from '../class/task'; // Modelo da tarefa
 import { TaskServiceService } from '../services/task-service.service';  // Serviço de manipulação de "Tarefa"
-import { ModalController } from '@ionic/angular'; // Controlador de modal do Ionic
-
-
+import { ModalController, ToastController } from '@ionic/angular'; // Controlador de modal do Ionic
 
 @Component({
   selector: 'app-display-task',
@@ -20,7 +18,8 @@ export class DisplayTaskPage implements OnInit {
 
   constructor(
     private taskService: TaskServiceService, // Serviço para manipular a tarefa
-    private modalCtrl: ModalController
+    private toastCtrl: ToastController,      // Serviço para exibir notificações toast
+    private modalCtrl: ModalController     // Serviço para controlar o modal
   ) { }
 
   // Método que será executado ao inicializar o componente
@@ -30,6 +29,35 @@ export class DisplayTaskPage implements OnInit {
     this.taskService.getTaskById(this.id).subscribe(res => {
       this.task = res;
     });
+  }
+
+  concTask(task: any){
+    if(task.status == true){
+      task.status = false;
+      this.taskService.completedTask(task);
+    }else if (task.status == false){
+      task.status = true;
+      this.taskService.completedTask(task);
+    }
+
+    // Fecha o modal após a atualização
+    this.modalCtrl.dismiss();
+  }
+
+  // Método chamado ao atualizar uma tarefa
+  async updateTask(){    
+    // Atualiza a tarefa com os dados atuais
+    this.taskService.updateTask(this.task!);
+
+    // Cria e exibe uma notificação (toast) indicando que a tarefa foi atualizado
+    const toast = await this.toastCtrl.create({
+      message: 'Tarefa atualizada!',
+      duration: 2000
+    });
+    toast.present();
+
+    // Fecha o modal após a atualização
+    this.modalCtrl.dismiss();
   }
 
   async deleteTask(){

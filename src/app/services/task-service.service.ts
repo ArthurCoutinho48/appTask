@@ -49,6 +49,12 @@ export class TaskServiceService {
     return docData(taskRef, {idField: 'id'}) as Observable<Task>; // Retorna a tarefa como Observable
   }
 
+  // Atualiza o título e conteúdo de um diário existente
+  updateTask(task: Task){
+    const taskRef = doc(this.firestore, `tasks/${task.id}`);// Referência ao documento
+    return updateDoc(taskRef, {title: task.title, content: task.content, createdAt: task.createdAt});
+  }
+
   // Retorna a tarefa com status atualizado
   completedTask(task: any){
     const taskRef = doc(this.firestore, `tasks/${task.id}`) // Referência ao documento

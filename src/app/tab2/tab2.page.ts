@@ -16,6 +16,8 @@ export class Tab2Page implements OnInit{
 
   userId: any;             // Armazena o ID do usuário autenticado
   tasks: Task[] = [];      // Lista de tarefas do usuário
+  tasksToday: Task[] = [];
+
 
   constructor(
     private authService: AuthenticationService,     // Injeta o serviço de autenticação
@@ -52,8 +54,21 @@ export class Tab2Page implements OnInit{
 
       // Recupera as tarefas associadas a esse usuário
       this.taskService.getTasks(this.userId).subscribe(res =>{
-        this.tasks = res; // Atualiza a lista de tarefas com o resultado recebido
-        console.log(this.tasks);
+
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+        const todayStr = `${day}/${month}/${year}`;
+
+        // Filtra tarefas com createdAt igual à data de hoje
+        this.tasksToday = res.filter((task) => task.createdAt === todayStr);
+
+        // Atualiza a lista de tarefas da tela com as do dia
+        this.tasks = this.tasksToday;
+
+        console.log(res);
+        console.log('Tarefas do dia:', this.tasksToday);
       })
     })
   }

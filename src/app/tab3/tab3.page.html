@@ -35,33 +35,19 @@
     <h4 class="p-4">Próximas tarefas</h4>
 
     <!--Card 01-->
-    <ion-item button line="nome">
+    <ion-item button line="nome" *ngFor="let task of tasks" (click)="openTask(task)">
       <ion-avatar slot="start" class="medium">
         <img src="../../assets/icon/atom.svg" alt="Foto">
       </ion-avatar>
       <ion-label>
-        Curso Ciência
-        <p>Apresentação</p>
+        {{task.title}}
+        <p>{{ task.status ? 'Concluído' : 'Pendente' }}</p>
       </ion-label>
       <ion-label slot="end">
-        <p class="ion-text-right">Seg, 10:00 AM</p>
+        <p class="ion-text-right">{{task.createdAt}}</p>
         <p>&nbsp;</p>
       </ion-label>
     </ion-item>
 
-     <!--Card 02-->
-     <ion-item button line="nome">
-      <ion-avatar slot="start" class="medium">
-        <img src="../../assets/icon/atom.svg" alt="Foto">
-      </ion-avatar>
-      <ion-label>
-        Curso Ciência
-        <p>Teste</p>
-      </ion-label>
-      <ion-label slot="end">
-        <p class="ion-text-right">Sex, 10:00 AM</p>
-        <p>&nbsp;</p>
-      </ion-label>
-    </ion-item>
   </div>
 </ion-content>

@@ -30,12 +30,12 @@
                   
                     <ion-item>
                       <ion-input 
-                        [value]="task.createdAt"
-                        (ionInput)="formatarData($event)"
+                        [(ngModel)]="task.createdAt"
                         class="input"
                         type="text"
-                        inputmode="numeric"
-                        placeholder="dd/mm/aaaa">
+                        placeholder="dd/mm/aaaa"
+                        maxlength="10"
+                        (ionInput)="formatarData($event)">
                       </ion-input>
                     </ion-item>
                   
@@ -62,8 +62,8 @@
     </ion-grid>
    
     <div>
-      <ion-button id="verde">Realizado</ion-button>
-      <ion-button id="cinza">Alterar</ion-button>
+      <ion-button id="verde" (click)="concTask(task)">Realizado</ion-button>
+      <ion-button id="cinza" (click)="updateTask()">Alterar</ion-button>
       <ion-button id="vermelho" (click)="deleteTask()">Excluir</ion-button>
     </div>
   </div>
