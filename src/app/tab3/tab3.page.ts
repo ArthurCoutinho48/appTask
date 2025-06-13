@@ -4,6 +4,7 @@ import { TaskServiceService } from '../services/task-service.service'; // Servi�
 import { Task } from '../class/task'; // Modelo da tarefa
 import { IonModal, ModalController } from '@ionic/angular';
 import { DisplayTaskPage } from '../display-task/display-task.page';
+import { AvatarServiceService } from '../services/avatar-service.service';
 
 export class Day {
   public number: number = 0;
@@ -35,12 +36,15 @@ export class Tab3Page implements OnInit {
 
   userId: any;             // Armazena o ID do usuário autenticado
   tasks: Task[] = [];      // Lista de tarefas do usuário
+
+  avatarUrl: string = '';
   
   // Construtor: inicializa o ano e o mês atual com base na data do sistema
   constructor(
     private authService: AuthenticationService,     // Injeta o serviço de autenticação
     private taskService: TaskServiceService,         // Injeta o serviço de tarefas
-    private modalCtrl: ModalController // Controlador de modal
+    private modalCtrl: ModalController, // Controlador de modal
+    private avatarService: AvatarServiceService
   ) {
     let date = new Date();
     this.currentYear = date.getFullYear();
@@ -54,12 +58,15 @@ export class Tab3Page implements OnInit {
     this.weekDaysName = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
     // Ao iniciar a página, obtém o perfil do usuário autenticado
-    this.authService.getProfile().then(user =>{
+    this.authService.getProfile().then(async user =>{
       this.userId = user?.uid; // Armazena o ID do usuário
       console.log(this.userId);
 
       this.loadTasksForCurrentMonth();
+      this.avatarUrl = await this.avatarService.getAvatarUrl();
     })
+
+   
   }
   
   getMonth(monthIndex: number, year: number): Day[] {
@@ -161,12 +168,20 @@ export class Tab3Page implements OnInit {
       const selectedMonth = String(this.currentMonthIndex + 1).padStart(2, '0');
       const selectedYear = String(this.currentYear);
 
-      this.tasks = res.filter((task) => {
-        const [day, month, year] = task.createdAt.trim().split('/');
-        return month === selectedMonth && year === selectedYear;
-      });
+      this.tasks = res
+        .filter(task => {
+          const [day, month, year] = task.createdAt.trim().split('/');
+          return month === selectedMonth && year === selectedYear;
+        })
+        .sort((a, b) => {
+          const [dayA, monthA, yearA] = a.createdAt.trim().split('/').map(Number);
+          const [dayB, monthB, yearB] = b.createdAt.trim().split('/').map(Number);
+          const dateA = new Date(yearA, monthA - 1, dayA);
+          const dateB = new Date(yearB, monthB - 1, dayB);
+          return dateA.getTime() - dateB.getTime(); // ✅ ordem crescente
+        });
 
-      console.log('Tarefas do mês:', this.tasks);
+      console.log('Tarefas do mês ordenadas:', this.tasks);
     });
   }
 

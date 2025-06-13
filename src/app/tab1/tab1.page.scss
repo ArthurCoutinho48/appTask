@@ -1,3 +1,12 @@
+.avatar{
+     ion-avatar{
+        width: 40px;
+        height: 40px;
+        --border-radius: 50%;
+        color: var(--cor-neutra-1);
+    }
+}
+
 .title{
 
     //Icon dos cards

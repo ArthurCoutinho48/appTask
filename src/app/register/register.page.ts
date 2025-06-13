@@ -58,7 +58,8 @@ export class RegisterPage implements OnInit {
     if (this.regForm?.valid) {
       const user = await this.authService.registerUser(
         this.regForm.value.email, // Email do formulário
-        this.regForm.value.password // Senha do formulário
+        this.regForm.value.password, // Senha do formulário
+        this.regForm.value.fullname  // <-- Passa o nome completo aqui
       ).catch((erro) => {
         // Captura e exibe erros de registro
         console.log(erro);

@@ -9,11 +9,10 @@
 
     <ion-item button lines="none">
       <ion-avatar slot="start" class="dark">
-        <img src="" alt="Foto">
+        <img [src]="avatarUrl" alt="Avatar do usuário" />
       </ion-avatar>
       <ion-label>
-        {{user}}
-        <p>Grade 11</p>
+        {{userName}}
       </ion-label>
     </ion-item>
 

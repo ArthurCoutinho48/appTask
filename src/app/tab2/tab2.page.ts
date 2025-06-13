@@ -4,6 +4,8 @@ import { TaskServiceService } from '../services/task-service.service'; // Servi�
 import { Task } from '../class/task'; // Modelo da tarefa
 import { IonModal, ModalController } from '@ionic/angular';
 import { DisplayTaskPage } from '../display-task/display-task.page'; // Página do modal de tarefa
+import { AvatarServiceService } from '../services/avatar-service.service';
+
 
 @Component({
   selector: 'app-tab2',
@@ -17,12 +19,13 @@ export class Tab2Page implements OnInit{
   userId: any;             // Armazena o ID do usuário autenticado
   tasks: Task[] = [];      // Lista de tarefas do usuário
   tasksToday: Task[] = [];
-
+  avatarUrl: string = '';
 
   constructor(
     private authService: AuthenticationService,     // Injeta o serviço de autenticação
     private taskService: TaskServiceService,         // Injeta o serviço de tarefas
-    private modalCtrl: ModalController // Controlador de modal
+    private modalCtrl: ModalController, // Controlador de modal
+    private avatarService: AvatarServiceService
   ) {}
 
   // Abre um modal com os detalhes de um diário específico
@@ -48,7 +51,7 @@ export class Tab2Page implements OnInit{
 
   ngOnInit() {
     // Ao iniciar a página, obtém o perfil do usuário autenticado
-    this.authService.getProfile().then(user =>{
+    this.authService.getProfile().then(async user =>{
       this.userId = user?.uid; // Armazena o ID do usuário
       console.log(this.userId);
 
@@ -70,6 +73,8 @@ export class Tab2Page implements OnInit{
         console.log(res);
         console.log('Tarefas do dia:', this.tasksToday);
       })
+
+      this.avatarUrl = await this.avatarService.getAvatarUrl();
     })
   }
 }

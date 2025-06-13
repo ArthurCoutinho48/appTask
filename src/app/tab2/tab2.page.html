@@ -2,9 +2,10 @@
   <ion-toolbar>
     <ion-title>Programação</ion-title>
 
-    <ion-buttons slot="end">
-      <ion-button color="medium">
-        <ion-icon  name="ellipse" class="large-icon"></ion-icon>
+    <ion-buttons slot="end" class="avatar">
+        <ion-button color="medium"><ion-avatar slot="start" class="dark">
+          <img [src]="avatarUrl" alt="Avatar do usuário" />
+        </ion-avatar>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

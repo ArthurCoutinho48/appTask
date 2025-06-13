@@ -162,6 +162,7 @@ ion-title{
 }
 
 ion-tab-bar{
+    height: 65px;
     --border: none;
 
     ion-tab-button{
@@ -176,9 +177,21 @@ ion-tab-bar{
     .tab-selected{
         ion-icon{
             color: #fff;
-            background: var(--custom-gradient-dark);
+            background: var(--cor-neutra-4);
         }
     }
+}
+
+
+ion-tab-button.ion-activated {
+  background-color: transparent !important; /* Remove o fundo azul */
+  --background: transparent !important;     /* Garante que variáveis CSS também não forcem a cor */
+  box-shadow: none !important;
+}
+
+ion-tab-button {
+  --background-activated: transparent !important;
+  --ripple-color: transparent !important; /* Remove o ripple azul, se for o caso */
 }
 
 .large-icon {

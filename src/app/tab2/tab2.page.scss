@@ -1,3 +1,12 @@
+.avatar{
+     ion-avatar{
+        width: 40px;
+        height: 40px;
+        --border-radius: 50%;
+        color: var(--cor-neutra-1);
+    }
+}
+
 .ion-padding{
     h4{
         color: var(--cor-neutra-4);
@@ -20,42 +29,6 @@ ion-card{
     text-decoration: line-through;
 }
 
-/*
-.title{
-
-    //Icon dos cards
-    ion-icon:first-child, ion-badge{
-        font-size: 20px;
-        color: var(--cor-neutra-3);
-        background-color: var(--cor-neutra-1);
-        margin-top: 6px;
-        margin-right: 14px;
-        padding: 4px;
-        border: 1px solid var(--cor-neutra-0);
-        border-radius: 8px;
-    }
-
-    ion-badge{
-        width: 32px;
-    }
-
-    p{
-        font-size: 14px;
-        line-height: 20px;
-    }
-
-    h2{
-        font-size: 32px;
-        font-weight: bold;
-        margin-top: 14px;
-    }
-
-    mb{
-        padding-bottom: 8px;
-    }
-
-}
-*/
 ion-card-title{
     color: var(--cor-neutra-1);
 }
