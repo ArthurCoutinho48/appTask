@@ -5,7 +5,7 @@
     <ion-buttons slot="end">
       <ion-button color="medium" class="avatar">
         <ion-avatar slot="start" class="dark">
-          <img [src]="avatarUrl"/>
+          <img [src]="avatarUrl" alt="Avatar do usuá" />
         </ion-avatar>
       </ion-button>
     </ion-buttons>
@@ -39,7 +39,7 @@
     <!--Card 01-->
     <ion-item button line="nome" *ngFor="let task of tasks" (click)="openTask(task)">
       <ion-avatar slot="start" class="medium">
-        <img src="../../assets/icon/atom.svg" alt="Foto">
+        <img src="../../assets/icon/book-outline.svg" alt="Foto">
       </ion-avatar>
       <ion-label>
         {{task.title}}

@@ -35,7 +35,7 @@
              
               <ion-card-subtitle class="cardSubTitle"> 
                 <div>
-                  <ion-icon name="remove-circle-outline" class="fl" id="pd"></ion-icon>
+                  <ion-icon   [name]="task.status ? 'checkmark-circle-outline' : 'remove-circle-outline'" class="fl" id="pd"></ion-icon>
                   <p>{{ task.status ? 'Concluído' : 'Pendente' }}</p>
                 </div>
                 <div>
