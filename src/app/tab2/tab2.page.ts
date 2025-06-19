@@ -50,31 +50,28 @@ export class Tab2Page implements OnInit{
   }
 
   ngOnInit() {
-    // Ao iniciar a página, obtém o perfil do usuário autenticado
-    this.authService.getProfile().then(async user =>{
-      this.userId = user?.uid; // Armazena o ID do usuário
-      console.log(this.userId);
+    this.authService.getProfile().then(async user => {
+      this.userId = user?.uid;
 
-      // Recupera as tarefas associadas a esse usuário
-      this.taskService.getTasks(this.userId).subscribe(res =>{
+      this.taskService.getTodayAndPendingTasks().subscribe(res => {
+        this.tasks = res;
 
-        const today = new Date();
-        const day = String(today.getDate()).padStart(2, '0');
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const year = today.getFullYear();
-        const todayStr = `${day}/${month}/${year}`;
+        // Filtra apenas as tarefas do dia se precisar delas separadas
+        const todayStr = this.formatDate(new Date());
+        this.tasksToday = res.filter(t => t.createdAt === todayStr);
 
-        // Filtra tarefas com createdAt igual à data de hoje
-        this.tasksToday = res.filter((task) => task.createdAt === todayStr);
-
-        // Atualiza a lista de tarefas da tela com as do dia
-        this.tasks = this.tasksToday;
-
-        console.log(res);
-        console.log('Tarefas do dia:', this.tasksToday);
-      })
+        console.log('Todas (hoje + pendentes):', this.tasks);
+        console.log('Somente hoje:', this.tasksToday);
+      });
 
       this.avatarUrl = await this.avatarService.getAvatarUrl();
-    })
+    });
+  }
+
+  private formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../class/task';
 import { AuthenticationService } from './authentication.service'; // Importa o serviço de autenticação personalizado
+import { from, map, switchMap } from 'rxjs'; // Adicione se ainda não tiver
+
 import {
   addDoc,          // adiciona um novo documento a uma coleção
   collection,      // referência a uma coleção
@@ -65,5 +67,56 @@ export class TaskServiceService {
   removeJournal(id: any){
     const taskRef = doc(this.firestore, `tasks/${id}`); // Referência ao documento
     return deleteDoc(taskRef); // Exclui o documento do Firestore
+  }
+
+  // Retorna tarefas do dia atual + pendentes de datas anteriores
+  getTodayAndPendingTasks(): Observable<Task[]> {
+    const today = new Date();
+    const todayStr = this.formatDate(today);
+
+    return from(this.authService.getProfile()).pipe(
+      switchMap(user => {
+        if (!user?.uid) throw new Error('Usuário não autenticado.');
+        return this.getTasks(user.uid);
+      }),
+      map(tasks => {
+        const filtered = tasks.filter(task => {
+          const isToday = task.createdAt === todayStr;
+          const isOverdueAndPending = this.isBeforeToday(task.createdAt) && task.status === false;
+          return isToday || isOverdueAndPending;
+        });
+
+        // Ordena em ordem crescente de data
+        return filtered.sort((a, b) => {
+          const dateA = this.parseDateString(a.createdAt);
+          const dateB = this.parseDateString(b.createdAt);
+          return dateA.getTime() - dateB.getTime(); // crescente
+        });
+      })
+    );
+  }
+
+  private parseDateString(dateStr: string): Date {
+    const [day, month, year] = dateStr.split('/').map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  // Função auxiliar para formatar data como "DD/MM/YYYY"
+  private formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  // Verifica se uma data no formato "DD/MM/YYYY" é anterior a hoje
+  private isBeforeToday(dateStr: string): boolean {
+    const [day, month, year] = dateStr.split('/').map(Number);
+    const taskDate = new Date(year, month - 1, day);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // zera a hora para comparação só por data
+
+    return taskDate < today;
   }
 }
