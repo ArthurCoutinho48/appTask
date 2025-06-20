@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskServiceService } from '../services/task-service.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';  // Importação do Ionic para mostrar loaders (carregamento visual)
 
 @Component({
   selector: 'app-task',
@@ -18,6 +19,7 @@ export class TaskPage implements OnInit {
 
   constructor(
      private toastCtrl: ToastController,            // controlador de toasts
+     public loadingCtrl: LoadingController,         // Exibição de loading (Ionic)
      private taskService: TaskServiceService, // serviço de diário
      private router: Router
   ) { }
@@ -29,6 +31,12 @@ export class TaskPage implements OnInit {
   async addTask(){
 
     if(this.title !== "" && this.content !== ""){
+      // Cria e exibe o loading
+      const loading = await this.loadingCtrl.create({
+        cssClass: 'custom-loading'
+      });
+      await loading.present();
+
       this.taskService.addTask({
         userId: "", // será preenchido pelo serviço com o ID do usuário
         status: false, // status da tarefa
@@ -36,22 +44,17 @@ export class TaskPage implements OnInit {
         createdAt: this.date, // data atual
         content: this.content, // conteúdo do formulário
       }).then(async () => {
-        // Mostra um toast de sucesso
-        const toast = await this.toastCtrl.create({
-          message: "Tarefa adicionada com sucesso!",
-          duration: 1500
-        });
-        toast.present();
-
         this.title = '';
         this.date = '';
         this.content = '';
 
-        // Aguarda o toast encerrar antes de redirecionar (opcional)
-        toast.onDidDismiss().then(() => {
-          this.router.navigate(['/tabs/tab2']); // <- substitua pelo caminho da sua página
+        this.router.navigate(['/tabs/tab2']).then(() => {
+          // Espera a página carregar completamente e fecha o loading
+          loading.dismiss();
         });
       }).catch(async (erro) => {
+        loading.dismiss();
+        
         // Mostra um toast de erro
         const toast = await this.toastCtrl.create({
           message: erro,

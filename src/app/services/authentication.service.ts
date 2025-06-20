@@ -63,8 +63,14 @@ export class AuthenticationService {
    * @param email - E-mail do usuário
    * @returns Promise com o resultado do envio
    */
-  async resetPassword(email: string) {
-    return await sendPasswordResetEmail(this.auth, email);
+   async resetPassword(email: string): Promise<void> {
+    try {
+      await sendPasswordResetEmail(this.auth, email);
+      console.log('Link de redefinição enviado para:', email);
+    } catch (error) {
+      console.error('Erro ao enviar link de redefinição:', error);
+      throw error; // Repassa o erro para que a página possa tratar
+    }
   }
 
   /**

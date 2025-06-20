@@ -29,6 +29,10 @@
         <ion-text *ngIf="errorControl['email']?.errors?.['pattern']">
           O e-mail deve ser válido!
         </ion-text>
+
+        <ion-text *ngIf="errorControl['email']?.errors?.['emailEmUso']">
+          Este e-mail já está em uso!
+        </ion-text>
       </div>
 
       <ion-item>

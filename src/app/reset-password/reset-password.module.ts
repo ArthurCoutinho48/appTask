@@ -8,11 +8,14 @@ import { ResetPasswordPageRoutingModule } from './reset-password-routing.module'
 
 import { ResetPasswordPage } from './reset-password.page';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     ResetPasswordPageRoutingModule
   ],
   declarations: [ResetPasswordPage]

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from '../class/task'; // Modelo da tarefa
 import { TaskServiceService } from '../services/task-service.service';  // Serviço de manipulação de "Tarefa"
-import { ModalController, ToastController } from '@ionic/angular'; // Controlador de modal do Ionic
+import { LoadingController, ModalController, ToastController } from '@ionic/angular'; // Controlador de modal do Ionic
 
 @Component({
   selector: 'app-display-task',
@@ -19,7 +19,8 @@ export class DisplayTaskPage implements OnInit {
   constructor(
     private taskService: TaskServiceService, // Serviço para manipular a tarefa
     private toastCtrl: ToastController,      // Serviço para exibir notificações toast
-    private modalCtrl: ModalController     // Serviço para controlar o modal
+    private modalCtrl: ModalController,     // Serviço para controlar o modal
+    private loadingCtrl: LoadingController 
   ) { }
 
   // Método que será executado ao inicializar o componente
@@ -61,11 +62,32 @@ export class DisplayTaskPage implements OnInit {
   }
 
   async deleteTask(){
-    // Remove a tarefa com base no ID
-    await this.taskService.removeJournal(this.id);
+    // Cria e exibe o loading
+    const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading'
+    });
+    await loading.present();
 
-    // Fecha o modal após a exclusão
-    this.modalCtrl.dismiss();
+    try {
+      // Fecha o modal após a exclusão
+      this.modalCtrl.dismiss();
+
+      // Remove a tarefa com base no ID
+      await this.taskService.removeJournal(this.id);
+      
+    } catch (error) {
+      // Exibe toast de erro
+      const toast = await this.toastCtrl.create({
+        message: 'Erro ao excluir tarefa.',
+        duration: 2000,
+        color: 'danger'
+      });
+      toast.present();
+    } finally {
+      // Fecha o loading em qualquer caso
+      loading.dismiss();
+    }
+    
   }
 
   formatarData(event: any){

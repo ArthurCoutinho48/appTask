@@ -55,25 +55,36 @@ export class LoginPage implements OnInit {
 
     // Verifica se o formulário é válido
     if (this.loginForm?.valid) {
-      // Tenta fazer login com os dados do formulário
-      const user = await this.authService.loginUser(
-        this.loginForm.value.email,
-        this.loginForm.value.password
-      ).catch((erro) => {
-        // Em caso de erro no login, exibe no console e fecha o loading
-        console.log(erro);
-        loading.dismiss();
-      });
 
-      // Se o login for bem-sucedido
-      if (user) {
-        loading.dismiss();                     // Fecha o loading
-        this.router.navigate(['/tabs/tab1']);   // Navega para a página "tab1"
-      } else {
-        // Caso o login falhe sem erro explícito (usuário nulo)
-        console.log('provide correct values');
+      try{
+        // Tenta fazer login com os dados do formulário
+        const user = await this.authService.loginUser(
+          this.loginForm.value.email,
+          this.loginForm.value.password
+        );
+        loading.dismiss();
+
+        if (user) {
+          this.router.navigate(['/tabs/tab1']);
+        }
+      } catch (erro: any) {
+        loading.dismiss();
+
+        if (erro.code === 'auth/wrong-password') {
+          this.loginForm.get('password')?.setErrors({ wrongPassword: true });
+        } else if (erro.code === 'auth/user-not-found') {
+          this.loginForm.get('email')?.setErrors({ userNotFound: true });
+        } else if (erro.code === 'auth/invalid-email') {
+          this.loginForm.get('email')?.setErrors({ invalidEmail: true });
+        } else if (erro.code === 'auth/invalid-credential') {
+          // Trata erro genérico quando Firebase não detalha o erro
+          this.loginForm.setErrors({ invalidLogin: true });
+        } else {
+          console.error('Erro inesperado no login:', erro);
+        }
+
       }
-    }else{
+    } else {
       this.loginForm.markAllAsTouched();
       loading.dismiss();
     }

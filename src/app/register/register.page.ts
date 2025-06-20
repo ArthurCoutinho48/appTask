@@ -64,6 +64,13 @@ export class RegisterPage implements OnInit {
         // Captura e exibe erros de registro
         console.log(erro);
         loading.dismiss(); // Fecha o loading
+
+        if (erro.code === 'auth/email-already-in-use') {
+          this.regForm.get('email')?.setErrors({ emailEmUso: true });
+        } else {
+          // outros erros genéricos podem ser tratados aqui se desejar
+          console.error('Erro ao registrar:', erro);
+        }
       });
 
       // Se o usuário foi criado com sucesso

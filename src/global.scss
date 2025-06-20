@@ -132,8 +132,9 @@
 }
 
 *{
-    font-family: var(--font-principal);
-    box-sizing: border-box;
+  font-family: var(--font-principal);
+  --ion-font-family: var(--font-principal);
+  box-sizing: border-box;
 }
 
 .medium{

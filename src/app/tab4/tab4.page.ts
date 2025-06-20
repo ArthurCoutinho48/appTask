@@ -36,7 +36,7 @@ export class Tab4Page implements OnInit {
     // Chama o método signOut do serviço de autenticação
     this.authService.signOut().then(() => {
       // Se o logout for bem-sucedido, navega para a página de "landing"
-      this.router.navigate(['/home']);
+      this.router.navigate(['/login']);
     }).catch((erro) => {
       // Em caso de erro, exibe no console
       console.log(erro);

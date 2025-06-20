@@ -20,6 +20,15 @@
         <ion-text *ngIf="errorControl['email']?.errors?.['pattern']">
           O e-mail deve ser válido!
         </ion-text>
+
+        <ion-text *ngIf="errorControl['email']?.errors?.['userNotFound']">
+          E-mail não cadastrado.
+        </ion-text>
+
+        <ion-text *ngIf="loginForm.errors?.['invalidLogin']">
+          E-mail ou senha incorretos.
+        </ion-text>
+        
       </div>
 
       <ion-item>
@@ -41,6 +50,14 @@
           Um número
           <br>
           Conter 8 dígitos
+        </ion-text>
+
+        <ion-text *ngIf="errorControl['password']?.errors?.['wrongPassword']">
+          Senha incorreta. Tente novamente.
+        </ion-text>
+
+        <ion-text *ngIf="loginForm.errors?.['invalidLogin']">
+          E-mail ou senha incorretos.
         </ion-text>
       </div>
 
