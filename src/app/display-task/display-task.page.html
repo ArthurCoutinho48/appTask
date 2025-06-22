@@ -55,7 +55,7 @@
     </ion-grid>
    
     <div>
-      <ion-button id="verde" (click)="concTask(task)">Realizado</ion-button>
+      <ion-button id="verde" (click)="concTask(task)" *ngIf="task && !task.status">Realizado</ion-button>
       <ion-button id="cinza" (click)="updateTask()">Alterar</ion-button>
       <ion-button id="vermelho" (click)="deleteTask()">Excluir</ion-button>
     </div>

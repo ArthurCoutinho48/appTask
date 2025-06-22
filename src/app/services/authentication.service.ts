@@ -100,7 +100,7 @@ export class AuthenticationService {
   /**
    * Busca o nome do usuário no Firestore pelo UID atual
    * @returns Promise<string> com o nome do usuário ou string vazia caso não encontre
-   */
+  */
   async getUserName(): Promise<string> {
     // Obtém o usuário atualmente autenticado pelo Firebase Auth
     const user = this.auth.currentUser;
@@ -133,5 +133,18 @@ export class AuthenticationService {
       // Retorna string vazia para evitar quebra do app
       return '';
     }
+  }
+
+  /**
+   * Atualiza o nome do usuário no Firestore
+   * @param newName - Novo nome a ser salvo
+  */
+  async updateUserName(newName: string): Promise<void> {
+    const user = this.auth.currentUser;
+
+    if (!user) throw new Error('Usuário não autenticado.');
+
+    const userRef = doc(this.firestore, `users/${user.uid}`);
+    await setDoc(userRef, { name: newName }, { merge: true }); // merge: true mantém os outros campos
   }
 }

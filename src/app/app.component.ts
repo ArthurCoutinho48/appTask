@@ -15,18 +15,18 @@ export class AppComponent {
     private auth: Auth,
     private router: Router
   ) {
-    this.checkIfUserIsLoggedIn();
+    //this.checkIfUserIsLoggedIn();
   }
-
+/*
   checkIfUserIsLoggedIn() {
     onAuthStateChanged(this.auth, user => {
       if (user) {
-        // Usuário logado, redireciona para a home (tabs, por exemplo)
+        // Usuário logado, redireciona para a home (tabs)
         this.router.navigate(['/tabs/tab1']);
       } else {
         // Usuário não está logado
-        this.router.navigate(['/login']);
+        this.router.navigate(['/home']);
       }
     });
-  }
+  }*/
 }

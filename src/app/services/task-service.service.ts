@@ -54,7 +54,7 @@ export class TaskServiceService {
   // Atualiza o título e conteúdo de um diário existente
   updateTask(task: Task){
     const taskRef = doc(this.firestore, `tasks/${task.id}`);// Referência ao documento
-    return updateDoc(taskRef, {title: task.title, content: task.content, createdAt: task.createdAt});
+    return updateDoc(taskRef, {title: task.title, content: task.content, createdAt: task.createdAt, status: task.status});
   }
 
   // Retorna a tarefa com status atualizado

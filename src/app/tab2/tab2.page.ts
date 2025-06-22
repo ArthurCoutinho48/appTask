@@ -37,6 +37,13 @@ export class Tab2Page implements OnInit{
       initialBreakpoint: 0.6 // Define o tamanho inicial do modal
     });
     await modal.present();
+
+    // Espera o modal ser fechado e recarrega a lista
+    const { data } = await modal.onDidDismiss();
+
+    if (data?.atualizada) {
+      this.carregarTarefas(); // só recarrega se tiver atualizado algo
+    }
   }
 
   concTask(task: any){
@@ -68,10 +75,28 @@ export class Tab2Page implements OnInit{
     });
   }
 
+  ionViewWillEnter() {
+    this.carregarTarefas(); // recarrega sempre que entrar na aba
+  }
+
   private formatDate(date: Date): string {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   }
+
+  private carregarTarefas() {
+    this.taskService.getTodayAndPendingTasks().subscribe(res => {
+      this.tasks = res;
+
+      const todayStr = this.formatDate(new Date());
+      this.tasksToday = res.filter(t => t.createdAt === todayStr);
+
+      console.log('Todas (hoje + pendentes):', this.tasks);
+      console.log('Somente hoje:', this.tasksToday);
+    });
+  }
+
+  
 }

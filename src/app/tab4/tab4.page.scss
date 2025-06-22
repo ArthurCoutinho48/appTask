@@ -25,3 +25,27 @@ ion-item:first-of-type{
 .logoutFilho{
     font-size: 30px;
 }
+
+::ng-deep .meu-alerta-personalizado .alert-title {
+  color: white !important;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+::ng-deep .meu-alerta-personalizado .alert-wrapper {
+  background-color: var(--cor-neutra-4) !important;
+  border-radius: 12px;
+  color: white;
+}
+
+::ng-deep .meu-alerta-personalizado .alert-button {
+  color: white !important;
+}
+
+::ng-deep .meu-alerta-personalizado .alert-message {
+  color: white !important;
+}
+
+::ng-deep .meu-alerta-personalizado .alert-input {
+  color: white !important;
+}

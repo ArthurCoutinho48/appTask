@@ -26,7 +26,7 @@ export class DisplayTaskPage implements OnInit {
   // Método que será executado ao inicializar o componente
   ngOnInit() {
 
-    // Recupera o journal com base no ID recebido via @Input e atribui ao objeto `journal`
+    // Recupera a task com base no ID recebido via @Input e atribui ao objeto `task`
     this.taskService.getTaskById(this.id).subscribe(res => {
       this.task = res;
     });
@@ -45,12 +45,16 @@ export class DisplayTaskPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  // Método chamado ao atualizar uma tarefa
   async updateTask(){    
+    // Se o status for true, muda para false
+    if (this.task && this.task.status === true) {
+      this.task.status = false;
+    }
+
     // Atualiza a tarefa com os dados atuais
     this.taskService.updateTask(this.task!);
 
-    // Cria e exibe uma notificação (toast) indicando que a tarefa foi atualizado
+    // Cria e exibe uma notificação (toast) indicando que a tarefa foi atualizada
     const toast = await this.toastCtrl.create({
       message: 'Tarefa atualizada!',
       duration: 2000
@@ -58,7 +62,7 @@ export class DisplayTaskPage implements OnInit {
     toast.present();
 
     // Fecha o modal após a atualização
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss({ atualizada: true });
   }
 
   async deleteTask(){
