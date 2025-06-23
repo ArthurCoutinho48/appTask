@@ -71,7 +71,7 @@ export class RegisterPage implements OnInit {
       // Se o usuário foi criado com sucesso
       if (user) {
         loading.dismiss(); // Fecha o loading
-        this.router.navigate(['/home']); // Redireciona para a página inicial
+        this.router.navigate(['/login']); // Redireciona para a página inicial
       }
     }else{
       this.regForm.markAllAsTouched();
