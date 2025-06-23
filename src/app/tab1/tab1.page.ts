@@ -24,42 +24,44 @@ export class Tab1Page implements OnInit{
   constructor(
     private authService: AuthenticationService,     // Injeta o serviço de autenticação
     private avatarService: AvatarServiceService,
-    private dashboardService: DashboardService) {}
+    private dashboardService: DashboardService
+  ) {}
 
+
+  // Atualiza o avatar sempre que a aba é exibida
+  async ionViewWillEnter() {
+    const user = await this.authService.getProfile();
+    this.userId = user?.uid;
+    this.avatarUrl = await this.avatarService.getAvatarUrl();
+  }
 
   ngOnInit() {
     // Ao iniciar a página, obtém o perfil do usuário autenticado
     this.authService.getProfile().then(async user =>{
       this.userId = user?.uid; // Armazena o ID do usuário
-      console.log(this.userId);
 
       this.avatarUrl = await this.avatarService.getAvatarUrl();
     })
 
     this.dashboardService.getTotalTasks().subscribe({
       next: total => this.totalTasks = total,
-      error: err => console.error(err)
     });
 
     this.dashboardService.getPendingTasks().subscribe({
       next: pending => this.pendingTasks = pending,
-      error: err => console.error(err)
     });
 
     this.dashboardService.getPendingTasksToday().subscribe({
       next: today => this.pendingToday = today,
-      error: err => console.error(err)
     });
 
     this.dashboardService.getTasksToday().subscribe({
       next: total => this.tasksToday = total,
-      error: err => console.error(err)
     });
 
     this.dashboardService.getTodayCompletionPercentage().subscribe({
-    next: percent => this.todayCompletionPercentage = percent,
-    error: err => console.error(err)
-  });
+      next: percent => this.todayCompletionPercentage = percent,
+    });
   }
 
 }

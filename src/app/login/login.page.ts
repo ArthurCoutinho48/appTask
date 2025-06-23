@@ -79,8 +79,6 @@ export class LoginPage implements OnInit {
         } else if (erro.code === 'auth/invalid-credential') {
           // Trata erro genérico quando Firebase não detalha o erro
           this.loginForm.setErrors({ invalidLogin: true });
-        } else {
-          console.error('Erro inesperado no login:', erro);
         }
 
       }

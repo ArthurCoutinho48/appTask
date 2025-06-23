@@ -9,14 +9,22 @@ import {
   User // Tipo de dado para o usuário autenticado
 } from '@angular/fire/auth';
 import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+
   // Injeta a instância do serviço de autenticação do Firebase
-  constructor(public auth: Auth, private firestore: Firestore) { }
+  constructor(public auth: Auth, private firestore: Firestore) {
+    // Mantém o estado do usuário sincronizado em tempo real
+    onAuthStateChanged(this.auth, user => {
+      this.currentUserSubject.next(user);
+    });
+  }
 
   /**
    * Registra um novo usuário com e-mail e senha
@@ -39,11 +47,8 @@ export class AuthenticationService {
           createdAt: new Date()
         });
 
-        console.log('Usuário registrado com sucesso:', user);
         return user;
-
       } catch (error) {
-        console.error('Erro ao registrar usuário:', error);
         throw error;
       }
   }
@@ -66,10 +71,8 @@ export class AuthenticationService {
    async resetPassword(email: string): Promise<void> {
     try {
       await sendPasswordResetEmail(this.auth, email);
-      console.log('Link de redefinição enviado para:', email);
     } catch (error) {
-      console.error('Erro ao enviar link de redefinição:', error);
-      throw error; // Repassa o erro para que a página possa tratar
+      throw error;
     }
   }
 
@@ -127,9 +130,6 @@ export class AuthenticationService {
         return '';
       }
     } catch (error) {
-      // Em caso de erro, exibe no console para debug
-      console.error('Erro ao buscar nome do usuário:', error);
-
       // Retorna string vazia para evitar quebra do app
       return '';
     }

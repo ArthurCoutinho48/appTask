@@ -66,16 +66,18 @@ export class Tab2Page implements OnInit{
         // Filtra apenas as tarefas do dia se precisar delas separadas
         const todayStr = this.formatDate(new Date());
         this.tasksToday = res.filter(t => t.createdAt === todayStr);
-
-        console.log('Todas (hoje + pendentes):', this.tasks);
-        console.log('Somente hoje:', this.tasksToday);
       });
 
       this.avatarUrl = await this.avatarService.getAvatarUrl();
     });
   }
 
-  ionViewWillEnter() {
+  // Atualiza o avatar sempre que a aba é exibida
+  async ionViewWillEnter() {
+    const user = await this.authService.getProfile();
+    this.userId = user?.uid;
+    this.avatarUrl = await this.avatarService.getAvatarUrl();
+
     this.carregarTarefas(); // recarrega sempre que entrar na aba
   }
 
@@ -92,9 +94,6 @@ export class Tab2Page implements OnInit{
 
       const todayStr = this.formatDate(new Date());
       this.tasksToday = res.filter(t => t.createdAt === todayStr);
-
-      console.log('Todas (hoje + pendentes):', this.tasks);
-      console.log('Somente hoje:', this.tasksToday);
     });
   }
 

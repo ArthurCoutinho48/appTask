@@ -5,15 +5,7 @@ import { Task } from '../class/task'; // Modelo da tarefa
 import { IonModal, ModalController } from '@ionic/angular';
 import { DisplayTaskPage } from '../display-task/display-task.page';
 import { AvatarServiceService } from '../services/avatar-service.service';
-
-export class Day {
-  public number: number = 0;
-  public year: number = 0;
-  public month: string = '';
-  public monthIndex: number = 0;
-  public weekDayName: string = '';
-  public weekDayNumber: number = 0;
-}
+import { Day } from '../class/day';
 
 @Component({
   selector: 'app-tab3',
@@ -49,6 +41,13 @@ export class Tab3Page implements OnInit {
     let date = new Date();
     this.currentYear = date.getFullYear();
     this.currentMonthIndex = date.getMonth(); // valores de 0 (jan) a 11 (dez)
+  }
+
+  // Atualiza o avatar sempre que a aba é exibida
+  async ionViewWillEnter() {
+    const user = await this.authService.getProfile();
+    this.userId = user?.uid;
+    this.avatarUrl = await this.avatarService.getAvatarUrl();
   }
   
   // Ao iniciar o componente, define os dias do mês atual e os nomes dos dias da semana
@@ -113,6 +112,7 @@ export class Tab3Page implements OnInit {
       "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
       "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
       ];
+    
       return months[monthIndex] || "";
   }
   
@@ -178,10 +178,9 @@ export class Tab3Page implements OnInit {
           const [dayB, monthB, yearB] = b.createdAt.trim().split('/').map(Number);
           const dateA = new Date(yearA, monthA - 1, dayA);
           const dateB = new Date(yearB, monthB - 1, dayB);
-          return dateA.getTime() - dateB.getTime(); // ✅ ordem crescente
+          return dateA.getTime() - dateB.getTime(); // ordem crescente
         });
 
-      console.log('Tarefas do mês ordenadas:', this.tasks);
     });
   }
 

@@ -60,8 +60,6 @@ export class ResetPasswordPage implements OnInit {
           if (erro.code === 'auth/user-not-found') {
             this.resetForm.get('email')?.setErrors({ emailNaoEncontrado: true });
           }
-
-          console.error(erro);
         });
 
     } else {

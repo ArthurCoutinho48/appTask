@@ -61,15 +61,10 @@ export class RegisterPage implements OnInit {
         this.regForm.value.password, // Senha do formulário
         this.regForm.value.fullname  // <-- Passa o nome completo aqui
       ).catch((erro) => {
-        // Captura e exibe erros de registro
-        console.log(erro);
         loading.dismiss(); // Fecha o loading
 
         if (erro.code === 'auth/email-already-in-use') {
           this.regForm.get('email')?.setErrors({ emailEmUso: true });
-        } else {
-          // outros erros genéricos podem ser tratados aqui se desejar
-          console.error('Erro ao registrar:', erro);
         }
       });
 
@@ -77,9 +72,6 @@ export class RegisterPage implements OnInit {
       if (user) {
         loading.dismiss(); // Fecha o loading
         this.router.navigate(['/home']); // Redireciona para a página inicial
-      } else {
-        // Mensagem de erro (poderia ser exibida para o usuário)
-        console.log('provide correct values');
       }
     }else{
       this.regForm.markAllAsTouched();
